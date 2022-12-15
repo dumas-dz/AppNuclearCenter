@@ -35,7 +35,7 @@
         <!-- ali-spring-cloud-alibaba -->
         <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
         <!-- nacos -->
-        <nacos-client.latest-version>2.1.2</nacos-client.latest-version>
+        <nacos-client.latest-version>2.2.0</nacos-client.latest-version>
         <!-- druid -->
         <druid-spring-boot-starter.version>1.1.18</druid-spring-boot-starter.version>
         <!--netty-->
@@ -43,7 +43,7 @@
         <!-- messagePack -->
         <msgpack.version>0.6.12</msgpack.version>
         <!--工具-->
-        <jackson.databind.version>2.14.0</jackson.databind.version>
+        <jackson.databind.version>2.14.1</jackson.databind.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.6.2</commons-pool2.version>
         <commons-collections4.version>4.4</commons-collections4.version>
@@ -70,7 +70,7 @@
         <validation-api.version>2.0.1.Final</validation-api.version>
         <ip2region.version>1.7.2</ip2region.version>
         <jwt.version>0.9.0</jwt.version>
-        <protobuf-java.version>3.21.9</protobuf-java.version>
+        <protobuf-java.version>3.21.11</protobuf-java.version>
         <protobuf-java-format.version>1.4</protobuf-java-format.version>
         <bitwalker.version>1.19</bitwalker.version>
         <joda.time.version>2.10.13</joda.time.version>
