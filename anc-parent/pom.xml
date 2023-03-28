@@ -35,7 +35,7 @@
         <!-- ali-spring-cloud-alibaba -->
         <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
         <!-- nacos -->
-        <nacos-client.latest-version>2.2.0</nacos-client.latest-version>
+        <nacos-client.latest-version>2.2.1</nacos-client.latest-version>
         <!-- druid -->
         <druid-spring-boot-starter.version>1.1.18</druid-spring-boot-starter.version>
         <!--netty-->
@@ -43,20 +43,20 @@
         <!-- messagePack -->
         <msgpack.version>0.6.12</msgpack.version>
         <!--工具-->
-        <jackson.databind.version>2.14.1</jackson.databind.version>
+        <jackson-databind.version>2.14.2</jackson-databind.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.6.2</commons-pool2.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-codec.version>1.12</commons-codec.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <commons-fileupload.version>1.4</commons-fileupload.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
         <commons-text.version>1.7</commons-text.version>
         <commons-math3.version>3.6.1</commons-math3.version>
         <google.guava.version>30.0-jre</google.guava.version>
         <google-gson.version>2.10</google-gson.version>
         <guava-retrying.version>2.0.0</guava-retrying.version>
-        <hutool.version>5.6.4</hutool.version>
+        <hutool.version>5.8.16</hutool.version>
         <fastjson.version>2.0.7</fastjson.version>
         <retrofit.version>2.5.0</retrofit.version>
         <lomok.version>1.16.22</lomok.version>
@@ -70,7 +70,7 @@
         <validation-api.version>2.0.1.Final</validation-api.version>
         <ip2region.version>1.7.2</ip2region.version>
         <jwt.version>0.9.0</jwt.version>
-        <protobuf-java.version>3.21.11</protobuf-java.version>
+        <protobuf-java.version>3.22.2</protobuf-java.version>
         <protobuf-java-format.version>1.4</protobuf-java-format.version>
         <bitwalker.version>1.19</bitwalker.version>
         <joda.time.version>2.10.13</joda.time.version>
@@ -389,7 +389,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson.databind.version}</version>
+                <version>${jackson-databind.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.vavr</groupId>
