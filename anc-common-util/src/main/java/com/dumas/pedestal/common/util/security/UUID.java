@@ -1,6 +1,6 @@
 package com.dumas.pedestal.common.util.security;
 
-import com.sun.xml.internal.ws.util.UtilException;
+import cn.hutool.core.exceptions.UtilException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,11 +1,10 @@
 package com.dumas.pedestal.common.util;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.ws.util.UtilException;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
+import cn.hutool.core.exceptions.UtilException;
+import com.alibaba.fastjson2.JSONObject;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import lombok.extern.slf4j.Slf4j;

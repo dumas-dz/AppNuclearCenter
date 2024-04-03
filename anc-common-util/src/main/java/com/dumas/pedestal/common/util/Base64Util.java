@@ -5,9 +5,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 /**
  * base64工具类
  *  录入了 {@code org.springframework.util.Base64Utils} 工具类
