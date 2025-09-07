@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.9.RELEASE</version>
+        <version>3.5.5</version>
         <relativePath/>
     </parent>
 
     <groupId>com.dumas.anc</groupId>
     <artifactId>anc-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <name>anc-parent</name>
     <packaging>pom</packaging>
     <description>
@@ -21,19 +21,20 @@
 
     <properties>
         <!-- 基础框架模块版本 -->
-        <anc.version>1.0.0-SNAPSHOT</anc.version>
+        <anc.version>2.0.0-SNAPSHOT</anc.version>
         <!-- 构建版本 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <jdk.version>1.8</jdk.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <jdk.version>17</jdk.version>
         <!-- spring -->
-        <spring-boot.version>2.3.9.RELEASE</spring-boot.version>
+        <spring-boot.version>3.5.5</spring-boot.version>
         <spring-boot-admin.version>2.3.0</spring-boot-admin.version>
         <!-- spring-cloud -->
-        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+        <spring-cloud.version>2023.0.6</spring-cloud.version>
+        <spring-cloud-starter-sleuth.version>3.1.11</spring-cloud-starter-sleuth.version>
         <!-- ali-spring-cloud-alibaba -->
-        <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
         <!-- nacos -->
         <nacos-client.latest-version>2.3.1</nacos-client.latest-version>
         <!-- druid -->
@@ -54,34 +55,34 @@
         <commons-text.version>1.7</commons-text.version>
         <commons-math3.version>3.6.1</commons-math3.version>
         <google.guava.version>33.1.0-jre</google.guava.version>
-        <google-gson.version>2.10</google-gson.version>
+        <google-gson.version>2.10.1</google-gson.version>
         <guava-retrying.version>2.0.0</guava-retrying.version>
         <hutool.version>5.8.27</hutool.version>
-        <fastjson2.version>2.0.26</fastjson2.version>
-        <retrofit.version>2.5.0</retrofit.version>
-        <lomok.version>1.16.22</lomok.version>
+        <fastjson.version>2.0.58</fastjson.version>
+        <fastjson2.version>2.0.58</fastjson2.version>
+        <retrofit.version>3.0.0</retrofit.version>
+        <lomok.version>1.18.40</lomok.version>
         <dropwizard.metric.core.version>4.0.0</dropwizard.metric.core.version>
-        <apache.http.client.version>4.5.13</apache.http.client.version>
-        <apache.http.httpmime.version>4.5.6</apache.http.httpmime.version>
-        <javax.persistence.version>2.2.1</javax.persistence.version>
-        <classgraph.version>4.8.43</classgraph.version>
-        <cglib-nodep.version>2.2.2</cglib-nodep.version>
-        <easy-excel.version>2.1.1</easy-excel.version>
-        <validation-api.version>2.0.1.Final</validation-api.version>
-        <ip2region.version>1.7.2</ip2region.version>
-        <jwt.version>0.9.0</jwt.version>
-        <protobuf-java.version>4.26.1</protobuf-java.version>
+        <apache.http.client.version>4.5.14</apache.http.client.version>
+        <apache.http.httpmime.version>4.5.14</apache.http.httpmime.version>
+        <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
+        <classgraph.version>4.8.181</classgraph.version>
+        <cglib-nodep.version>3.3.0</cglib-nodep.version>
+        <easy-excel.version>4.0.3</easy-excel.version>
+        <validation-api.version>3.1.1</validation-api.version>
+        <ip2region.version>2.7.0</ip2region.version>
+        <jwt.version>0.13.0</jwt.version>
+        <protobuf-java.version>4.32.0</protobuf-java.version>
         <protobuf-java-format.version>1.4</protobuf-java-format.version>
-        <bitwalker.version>1.19</bitwalker.version>
-        <joda.time.version>2.10.13</joda.time.version>
+        <bitwalker.version>1.21</bitwalker.version>
+        <joda.time.version>2.14.0</joda.time.version>
         <!--mybatis-->
-        <mybatis.spring-boot.version>2.1.0</mybatis.spring-boot.version>
-        <persistence-api.version>1.0</persistence-api.version>
-        <druid-starter.version>1.1.22</druid-starter.version>
-        <mybatis-plus-boot-starter.version>3.4.1</mybatis-plus-boot-starter.version>
-        <dynamic-datasource-spring-boot-starter.version>3.3.2</dynamic-datasource-spring-boot-starter.version>
-        <mysql.version>5.1.46</mysql.version>
-        <io-vovr.version>0.10.0</io-vovr.version>
+        <mybatis.spring-boot.version>3.0.5</mybatis.spring-boot.version>
+        <druid-starter.version>1.2.27</druid-starter.version>
+        <mybatis-plus-boot-starter.version>3.5.14</mybatis-plus-boot-starter.version>
+        <dynamic-datasource-spring-boot-starter.version>4.3.1</dynamic-datasource-spring-boot-starter.version>
+        <mysql.version>9.4.0</mysql.version>
+        <io-vovr.version>1.0.0-alpha-4</io-vovr.version>
         <!--swagger-->
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <swagger.spring-boot.version>1.9.0.RELEASE</swagger.spring-boot.version>
@@ -90,18 +91,18 @@
         <swagger-annotations.version>1.5.20</swagger-annotations.version>
         <swagger-models.version>1.5.22</swagger-models.version>
         <!--中间件-->
-        <rocketmq-client.version>4.7.0</rocketmq-client.version>
-        <rocketmq-spring-boot-starter.version>2.1.1</rocketmq-spring-boot-starter.version>
-        <ons-client.version>1.8.4.Final</ons-client.version>
+        <rocketmq-client.version>5.3.3</rocketmq-client.version>
+        <rocketmq-spring-boot-starter.version>2.3.4</rocketmq-spring-boot-starter.version>
+        <ons-client.version>2.0.8.Final</ons-client.version>
 
         <!-- 阿里云生态 -->
-        <aliyun-sdk-oss.version>3.8.0</aliyun-sdk-oss.version>
+        <aliyun-sdk-oss.version>3.18.3</aliyun-sdk-oss.version>
         <!-- 打包部署 -->
         <docker.maven.plugin.version>1.0.0</docker.maven.plugin.version>
         <docker.host>http://47.106.243.172:2375</docker.host>
 
-        <!-- WebMagic 爬虫-->
-        <webmagic.core.version>0.10.0</webmagic.core.version>
+        <!-- webmagic 爬虫-->
+        <webmagic.core.version>1.0.3</webmagic.core.version>
     </properties>
 
     <!--依赖管理-->
@@ -260,9 +261,14 @@
                 <version>${mybatis.spring-boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
-                <version>${persistence-api.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-jsqlparser</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.persistence</groupId>
+                <artifactId>jakarta.persistence-api</artifactId>
+                <version>${jakarta.persistence.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -365,8 +371,8 @@
                 <version>${retrofit.version}</version>
             </dependency>
             <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
                 <version>${validation-api.version}</version>
             </dependency>
             <!-- IP工具-->

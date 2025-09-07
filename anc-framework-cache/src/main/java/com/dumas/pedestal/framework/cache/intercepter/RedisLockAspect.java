@@ -5,7 +5,7 @@ import com.dumas.pedestal.framework.cache.RedisCache;
 import com.dumas.pedestal.framework.cache.annotation.RedisLock;
 import java.lang.reflect.Method;
 import java.util.UUID;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

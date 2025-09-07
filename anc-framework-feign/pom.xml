@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.dumas.anc</groupId>
         <artifactId>AppNuclearCenter</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>anc-framework-feign</artifactId>
     <name>anc-framework-feign</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>
         feign封装

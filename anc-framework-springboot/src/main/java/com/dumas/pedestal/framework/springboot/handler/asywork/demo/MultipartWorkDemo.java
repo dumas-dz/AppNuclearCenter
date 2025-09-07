@@ -4,7 +4,7 @@ import com.dumas.pedestal.framework.springboot.handler.asywork.AsynWorkPool;
 import com.dumas.pedestal.framework.springboot.handler.asywork.inf.AsynWork;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 

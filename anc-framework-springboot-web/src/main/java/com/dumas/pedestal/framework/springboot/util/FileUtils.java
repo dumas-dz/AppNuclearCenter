@@ -1,6 +1,6 @@
 package com.dumas.pedestal.framework.springboot.util;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.URLEncoder;
 
