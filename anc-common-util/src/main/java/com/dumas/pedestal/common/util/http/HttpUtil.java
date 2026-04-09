@@ -1,6 +1,5 @@
 package com.dumas.pedestal.common.util.http;
 
-import com.alibaba.fastjson.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,6 +16,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import com.alibaba.fastjson2.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;

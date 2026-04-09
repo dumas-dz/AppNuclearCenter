@@ -1,6 +1,6 @@
 package com.dumas.pedestal.framework.springboot.util;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.dumas.pedestal.common.util.http.HttpUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

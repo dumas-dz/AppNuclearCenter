@@ -1,6 +1,6 @@
 package com.dumas.pedestal.common.util.http;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -153,13 +153,16 @@ public class HTTPClientUtil {
 		try {
 			SSLContext e = SSLContexts.custom().useTLS().build();
 			e.init((KeyManager[]) null, new TrustManager[] { new X509TrustManager() {
+				@Override
 				public X509Certificate[] getAcceptedIssuers() {
 					return null;
 				}
 
+				@Override
 				public void checkClientTrusted(X509Certificate[] certs, String authType) {
 				}
 
+				@Override
 				public void checkServerTrusted(X509Certificate[] certs, String authType) {
 				}
 			} }, (SecureRandom) null);

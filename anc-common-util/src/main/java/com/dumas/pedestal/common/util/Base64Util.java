@@ -5,12 +5,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 /**
  * base64工具类
- *  录入了 {@code org.springframework.util.Base64Utils} 工具类
+ * 录入了 {@code org.springframework.util.Base64Utils} 工具类
  *
  * @author andaren
  * @version V1.0
@@ -21,22 +18,20 @@ public class Base64Util {
 
     /**
      * 将 base64字符串 还原成 字节数组
+     *
      * @param base64Str
      * @return
      */
     public static byte[] transformBase64(String base64Str) {
-        BASE64Decoder decode = new BASE64Decoder();
-        byte[] b = null;
-        try {
-            b = decode.decodeBuffer(base64Str);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (base64Str == null || base64Str.isEmpty()) {
+            return new byte[0];
         }
-        return b;
+        return Base64.getDecoder().decode(base64Str);
     }
 
     /**
      * base64解码
+     *
      * @param src
      * @return
      */
@@ -48,15 +43,19 @@ public class Base64Util {
     }
 
     public static String encodeBytes(byte[] bytes) {
-        BASE64Encoder encoder = new BASE64Encoder();
-        return encoder.encode(bytes);
+        if (bytes == null || bytes.length == 0) {
+            return "";
+        }
+        return Base64.getEncoder().encodeToString(bytes);
     }
 
 
     // org.springframework.util.Base64Utils 工具类部分
     // ------------------------------------------------------------------
+
     /**
      * Base64-encode the given byte array.
+     *
      * @param src the original byte array
      * @return the encoded byte array
      */
@@ -69,6 +68,7 @@ public class Base64Util {
 
     /**
      * Base64-decode the given byte array.
+     *
      * @param src the encoded byte array
      * @return the original byte array
      */
@@ -82,6 +82,7 @@ public class Base64Util {
     /**
      * Base64-encode the given byte array using the RFC 4648
      * "URL and Filename Safe Alphabet".
+     *
      * @param src the original byte array
      * @return the encoded byte array
      * @since 4.2.4
@@ -96,6 +97,7 @@ public class Base64Util {
     /**
      * Base64-decode the given byte array using the RFC 4648
      * "URL and Filename Safe Alphabet".
+     *
      * @param src the encoded byte array
      * @return the original byte array
      * @since 4.2.4
@@ -109,6 +111,7 @@ public class Base64Util {
 
     /**
      * Base64-encode the given byte array to a String.
+     *
      * @param src the original byte array
      * @return the encoded byte array as a UTF-8 String
      */
@@ -121,6 +124,7 @@ public class Base64Util {
 
     /**
      * Base64-decode the given byte array from an UTF-8 String.
+     *
      * @param src the encoded UTF-8 String
      * @return the original byte array
      */
@@ -134,6 +138,7 @@ public class Base64Util {
     /**
      * Base64-encode the given byte array to a String using the RFC 4648
      * "URL and Filename Safe Alphabet".
+     *
      * @param src the original byte array
      * @return the encoded byte array as a UTF-8 String
      */
@@ -144,6 +149,7 @@ public class Base64Util {
     /**
      * Base64-decode the given byte array from an UTF-8 String using the RFC 4648
      * "URL and Filename Safe Alphabet".
+     *
      * @param src the encoded UTF-8 String
      * @return the original byte array
      */

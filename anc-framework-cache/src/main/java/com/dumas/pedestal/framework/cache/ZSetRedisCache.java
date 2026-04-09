@@ -1,6 +1,6 @@
 package com.dumas.pedestal.framework.cache;
 
-import org.springframework.data.redis.connection.RedisZSetCommands;
+import org.springframework.data.redis.connection.zset.Tuple;
 import org.springframework.data.redis.serializer.SerializationUtils;
 import org.springframework.stereotype.Component;
 
@@ -81,12 +81,12 @@ public class ZSetRedisCache extends BaseRawRedisCache {
      */
     public <T> Set<ScoreTuple> zRevRangeWithScore(String key, long start, long end, Class<T> t) {
         byte[] rawKey = rawKey(key);
-        Set<RedisZSetCommands.Tuple> resultSets = execute(connection -> connection.zSetCommands().zRevRangeByScoreWithScores(rawKey, 0, Double.MAX_VALUE, start, end));
+        Set<Tuple> resultSets = execute(connection -> connection.zSetCommands().zRevRangeByScoreWithScores(rawKey, 0, Double.MAX_VALUE, start, end));
         if (resultSets == null) {
             return null;
         }
         Set<ScoreTuple> set = new LinkedHashSet<>(resultSets.size());
-        for (RedisZSetCommands.Tuple rawValue : resultSets) {
+        for (Tuple rawValue : resultSets) {
             set.add(new ScoreTuple(getSerializer(t).deserialize(rawValue.getValue()), rawValue.getScore()));
         }
         return set;
@@ -102,12 +102,12 @@ public class ZSetRedisCache extends BaseRawRedisCache {
      */
     public <T> Set<ScoreTuple> zRangeWithScore(String key, long start, long end, Class<T> t) {
         byte[] rawKey = rawKey(key);
-        Set<RedisZSetCommands.Tuple> resultSets = execute(connection -> connection.zSetCommands().zRangeByScoreWithScores(rawKey, 0, Double.MAX_VALUE, start, end));
+        Set<Tuple> resultSets = execute(connection -> connection.zSetCommands().zRangeByScoreWithScores(rawKey, 0, Double.MAX_VALUE, start, end));
         if (resultSets == null) {
             return null;
         }
         Set<ScoreTuple> set = new LinkedHashSet<>(resultSets.size());
-        for (RedisZSetCommands.Tuple rawValue : resultSets) {
+        for (Tuple rawValue : resultSets) {
             set.add(new ScoreTuple(getSerializer(t).deserialize(rawValue.getValue()), rawValue.getScore()));
         }
         return set;
@@ -178,7 +178,13 @@ public class ZSetRedisCache extends BaseRawRedisCache {
      * @return: java.lang.Long
      */
     public Long zUnionStore(String destKey, String target, String source) {
-        return execute(connection -> connection.zUnionStore(rawKey(destKey), RedisZSetCommands.Aggregate.SUM, new int[]{1, Integer.MIN_VALUE}, rawKey(target), rawKey(source)));
+        return execute(connection -> connection.zUnionStore(
+                rawKey(destKey),
+                org.springframework.data.redis.connection.zset.Aggregate.SUM,
+                new int[]{1, Integer.MIN_VALUE},
+                rawKey(target),
+                rawKey(source)
+        ));
     }
 
     /**

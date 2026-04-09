@@ -7,12 +7,12 @@
     <parent>
         <groupId>com.dumas.anc</groupId>
         <artifactId>AppNuclearCenter</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>anc-framework-mongodb</artifactId>
     <name>anc-framework-mongodb</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <description>
         SpringBoot集成mongodb
     </description>

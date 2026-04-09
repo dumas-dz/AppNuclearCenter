@@ -4,8 +4,8 @@ import com.dumas.pedestal.framework.validation.annotation.InStringArray;
 
 import java.util.stream.Stream;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * 实现注解校验InArray

@@ -106,7 +106,7 @@ public class FileUploadUtils {
      * 编码文件名
      */
     public static final String extractFilename(MultipartFile file) {
-        String fileName = file.getOriginalFilename();
+        String fileName = FilenameUtils.getName(file.getOriginalFilename());
         String extension = getExtension(file);
         fileName = DateUtil.datePath() + "/" + encodingFilename(fileName) + "." + extension;
         return fileName;
@@ -156,7 +156,7 @@ public class FileUploadUtils {
             throw new FileSizeLimitExceededException(DEFAULT_MAX_SIZE / 1024 / 1024);
         }
 
-        String fileName = file.getOriginalFilename();
+        String fileName = FilenameUtils.getName(file.getOriginalFilename());
         String extension = getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
             if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION) {

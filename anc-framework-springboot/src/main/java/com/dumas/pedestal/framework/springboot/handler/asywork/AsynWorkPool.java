@@ -17,7 +17,7 @@ package com.dumas.pedestal.framework.springboot.handler.asywork;
 import com.dumas.pedestal.framework.springboot.handler.asywork.inf.AsynWork;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 

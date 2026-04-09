@@ -1,10 +1,9 @@
 package com.dumas.pedestal.common.util.security;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.alibaba.fastjson2.annotation.JSONField;
 import org.apache.http.util.Asserts;
 
 import lombok.Data;
@@ -35,8 +34,9 @@ public class HMACSHA256 {
         String stmp;
         for (int n = 0; b!=null && n < b.length; n++) {
             stmp = Integer.toHexString(b[n] & 0XFF);
-            if (stmp.length() == 1)
+            if (stmp.length() == 1) {
                 hs.append('0');
+            }
             hs.append(stmp);
         }
         return hs.toString().toLowerCase();

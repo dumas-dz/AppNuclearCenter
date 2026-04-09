@@ -9,13 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * MyBatis TypeHandler for AES encryption/decryption of String values.
+ *
  * @author dumas
  * @date 2021/12/06 3:07 PM
  */
-public class AESEncryptHandler extends BaseTypeHandler {
+public class AESEncryptHandler extends BaseTypeHandler<String> {
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, Object parameter, JdbcType jdbcType) throws SQLException {
-        ps.setString(i, AES.encrypt((String)parameter));
+    public void setNonNullParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType) throws SQLException {
+        ps.setString(i, AES.encrypt(parameter));
     }
     @Override
     public String getNullableResult(ResultSet rs, String columnName) throws SQLException {

@@ -2,7 +2,7 @@ package com.dumas.pedestal.framework.validation.annotation;
 
 import com.dumas.pedestal.framework.validation.constraintvalidation.PhoneNumberValidator;
 
-import javax.validation.Constraint;
+import jakarta.validation.Constraint;
 import java.lang.annotation.*;
 
 @Documented

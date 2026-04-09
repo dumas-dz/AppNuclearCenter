@@ -2,8 +2,8 @@ package com.dumas.pedestal.framework.validation.constraintvalidation;
 
 import com.dumas.pedestal.framework.validation.annotation.PhoneNumber;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, String> {
     @Override

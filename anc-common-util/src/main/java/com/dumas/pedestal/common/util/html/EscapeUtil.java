@@ -94,14 +94,17 @@ public class EscapeUtil {
         while (lastPos < content.length()) {
             pos = content.indexOf("%", lastPos);
             if (pos == lastPos) {
-                if (content.charAt(pos + 1) == 'u') {
+                if (pos + 6 <= content.length() && content.charAt(pos + 1) == 'u') {
                     ch = (char) Integer.parseInt(content.substring(pos + 2, pos + 6), 16);
                     tmp.append(ch);
                     lastPos = pos + 6;
-                } else {
+                } else if (pos + 3 <= content.length()) {
                     ch = (char) Integer.parseInt(content.substring(pos + 1, pos + 3), 16);
                     tmp.append(ch);
                     lastPos = pos + 3;
+                } else {
+                    tmp.append(content.substring(lastPos));
+                    break;
                 }
             } else {
                 if (pos == -1) {

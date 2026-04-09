@@ -41,9 +41,9 @@ public class SignUtil {
         }
         allList.add(signKey);
         String sign = StringUtils.join(allList.iterator(), "");
-        log.info("签名数据<原文>：{}" + sign);
+        log.debug("签名数据<原文>：{}", sign);
         String encodeSign = SecureUtil.md5(sign).toUpperCase();
-        log.info("签名数据<MD5>：{}" + encodeSign);
+        log.debug("签名数据<MD5>：{}", encodeSign);
         return encodeSign;
     }
 
@@ -57,13 +57,13 @@ public class SignUtil {
     public static String signDB(String signKey, TreeMap<String, Object> params) {
         Preconditions.checkState(StringUtils.isNotEmpty(signKey), "未指定签名MD5Key");
         Preconditions.checkState(params != null && !params.isEmpty(), "未指定需要签名的参数");
-        log.info("参数名称: {}", params.keySet());
-        String sign = Joiner.on('|').useForNull("").join(params.values()) + "|" + signKey;
-        log.info("签名数据<原⽂>: {}", sign);
+        log.debug("参数名称: {}", params.keySet());
+        String sign = Joiner.on('|').useForNull("").join(params.values()) + "|" + "***";
+        log.debug("签名数据<原⽂>: {}", sign);
         String encodeSign = CodecUtil.encodeUrl(sign);
-        log.info("签名数据<URLEncode>: {}", encodeSign);
+        log.debug("签名数据<URLEncode>: {}", encodeSign);
         encodeSign = CodecUtil.encodeMD5AsHexString(encodeSign);
-        log.info("签名数据<MD5>: {}", encodeSign);
+        log.debug("签名数据<MD5>: {}", encodeSign);
         return encodeSign;
     }
 

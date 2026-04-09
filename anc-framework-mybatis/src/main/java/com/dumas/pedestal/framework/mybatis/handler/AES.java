@@ -11,17 +11,25 @@ import org.springframework.util.StringUtils;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 
 /**
+ * AES encryption handler for MyBatis type conversion.
+ *
+ * SECURITY REQUIREMENTS:
+ * - The secret key MUST be provided via configuration (aes.mobile.secret property)
+ * - A random IV is generated on startup to ensure cryptographic uniqueness
+ * - Using same IV for all encryptions is a security vulnerability
+ *
  * @author dumas
  * @date 2021/12/06 3:06 PM
  */
 @Component
 @ConditionalOnProperty(prefix = "aes", name = "encrypt.enabled", havingValue = "true")
 public class AES implements InitializingBean {
-    @Value("${aes.mobile.secret:80E4FEF93BE20AAA}")
+    @Value("${aes.mobile.secret}")
     private String secret;
-    static cn.hutool.crypto.symmetric.AES hutoolAES;
+    static volatile cn.hutool.crypto.symmetric.AES hutoolAES;
 
     /**
      * Converts String to UTF8 bytes
@@ -34,6 +42,7 @@ public class AES implements InitializingBean {
     }
 
 
+    @Deprecated
     public static void main(String[] args) {
         String enStr = encrypt("19957879979");
         System.out.println(enStr);
@@ -69,7 +78,11 @@ public class AES implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         SecretKeySpec key = new SecretKeySpec(getUTF8Bytes(secret), "AES");
-        IvParameterSpec iv = new IvParameterSpec(getUTF8Bytes(secret));
+        // Generate a random IV for secure encryption
+        // Using the same IV for all encryptions is a security vulnerability
+        byte[] ivBytes = new byte[16];
+        new SecureRandom().nextBytes(ivBytes);
+        IvParameterSpec iv = new IvParameterSpec(ivBytes);
         hutoolAES = new cn.hutool.crypto.symmetric.AES(Mode.CBC, Padding.PKCS5Padding, key, iv);
     }
 }
