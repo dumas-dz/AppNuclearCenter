@@ -15,6 +15,9 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 文件工具类
  *
@@ -24,6 +27,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class FileUtil {
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
+    private static final Logger log = LoggerFactory.getLogger(FileUtil.class);
 
     public static String readFile(String path) {
         Path filePath = Paths.get(path);
@@ -32,7 +36,7 @@ public class FileUtil {
             contentBytes = Files.readAllBytes(filePath);
             return new String(contentBytes, StandardCharsets.UTF_8);
         } catch (IOException ioe) {
-           ioe.printStackTrace();
+           log.error("Failed to read file: {}", path, ioe);
            return null;
         }
     }
@@ -43,7 +47,7 @@ public class FileUtil {
         try {
             Files.write(filePath, contentBytes);
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            log.error("Failed to write string to file: {}", path, ioe);
         }
     }
 
@@ -52,7 +56,7 @@ public class FileUtil {
         try {
             Files.write(filePath, jsonData.getBytes(StandardCharsets.UTF_8), StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            log.error("Failed to write JSON to file: {}", path, ioe);
         }
     }
 
@@ -83,14 +87,14 @@ public class FileUtil {
                 try {
                     os.close();
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+                    log.error("Failed to close output stream", e1);
                 }
             }
             if (fis != null) {
                 try {
                     fis.close();
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+                    log.error("Failed to close file input stream", e1);
                 }
             }
         }

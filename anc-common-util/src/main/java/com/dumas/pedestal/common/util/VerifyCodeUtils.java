@@ -46,7 +46,7 @@ public class VerifyCodeUtils {
             sources = VERIFY_CODES;
         }
         int codesLen = sources.length();
-        Random rand = new Random(System.currentTimeMillis());
+        Random rand = random; // Use class-level SecureRandom
         StringBuilder verifyCode = new StringBuilder(verifySize);
         for (int i = 0; i < verifySize; i++) {
             verifyCode.append(sources.charAt(rand.nextInt(codesLen - 1)));

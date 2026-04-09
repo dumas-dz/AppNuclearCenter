@@ -3,6 +3,7 @@ package com.dumas.pedestal.common.util;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputFilter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -137,6 +138,19 @@ public class BeanUtil {
 
         ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
         ObjectInputStream in = new ObjectInputStream(byteIn);
+        in.setObjectInputFilter(filterInfo -> {
+            Class<?> serialClass = filterInfo.serialClass();
+            if (serialClass != null) {
+                // Allow only java.base, java.util, and java.lang types
+                String className = serialClass.getName();
+                if (className.startsWith("java.util.") || className.startsWith("java.lang.")
+                    || className.startsWith("[Ljava.util.") || className.startsWith("java.base/")) {
+                    return ObjectInputFilter.Status.ALLOWED;
+                }
+                return ObjectInputFilter.Status.REJECTED;
+            }
+            return ObjectInputFilter.Status.UNDECIDED;
+        });
         @SuppressWarnings("unchecked")
         List<T> dest = (List<T>) in.readObject();
         return dest;

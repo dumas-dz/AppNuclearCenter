@@ -7,87 +7,79 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.netty.buffer.ByteBufUtil;
 
 /**
- * TODO
+ * DES 加密工具类
+ *
+ * <p><b>安全警告：</b>DES 算法已被认为不安全（56位密钥可被暴力破解）。
+ * 建议新代码使用 {@link AESUtil} 的 GCM 方法。
+ * 本类仅保留用于兼容已有系统。
  *
  * @author andaren
  * @version V1.0
  * @since 2020-05-03 20:17
+ * @deprecated 使用 {@link AESUtil} 替代
  */
+@Deprecated
 public class DESUtil {
+    private static final Logger log = LoggerFactory.getLogger(DESUtil.class);
+
     private static final String DES = "DES";
     private static final String C_DES = "DES/ECB/NoPadding";
 
-    //测试
     public static void main(String args[]) {
         String sourceHex = "12345678123456781234567812345678";
-        //待加密内容
-        String str = sourceHex;
-        //密码，长度要是8的倍数
         byte[] password = "12345678".getBytes();
 
         byte[] result = DESUtil.encrypt(sourceHex.getBytes(), password);
-        System.out.println("加密后："+new String(result));
+        System.out.println("加密后：" + new String(result));
         System.out.println(ByteBufUtil.hexDump(result));
-        //直接将如上内容解密
         try {
             byte[] decryResult = DESUtil.decrypt(result, password);
-            System.out.println("解密后："+new String(decryResult));
+            System.out.println("解密后：" + new String(decryResult));
         } catch (Exception e1) {
-            e1.printStackTrace();
+            log.error("decrypt failed", e1);
         }
     }
+
     /**
      * 加密
-     * @param datasource byte[]
-     * @param password String
-     * @return byte[]
+     *
+     * @deprecated DES 不安全，请使用 {@link AESUtil#encryptBytesGCM(byte[], byte[])}
      */
-    public static  byte[] encrypt(byte[] datasource, byte[] password) {
-        try{
-//                    SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+    @Deprecated
+    public static byte[] encrypt(byte[] datasource, byte[] password) {
+        try {
             SecureRandom random = new SecureRandom();
             DESKeySpec desKey = new DESKeySpec(password);
-            //创建一个密匙工厂，然后用它把DESKeySpec转换成
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
             SecretKey securekey = keyFactory.generateSecret(desKey);
-            //Cipher对象实际完成加密操作
             Cipher cipher = Cipher.getInstance(C_DES);
-            //用密匙初始化Cipher对象
             cipher.init(Cipher.ENCRYPT_MODE, securekey, random);
-            //现在，获取数据并加密
-            //正式执行加密操作
             return cipher.doFinal(datasource);
-        }catch(Throwable e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("DES encrypt failed", e);
         }
         return null;
     }
+
     /**
      * 解密
-     * @param src byte[]
-     * @param password String
-     * @return byte[]
-     * @throws Exception
+     *
+     * @deprecated DES 不安全，请使用 {@link AESUtil#decryptBytesGCM(byte[], byte[])}
      */
+    @Deprecated
     public static byte[] decrypt(byte[] src, byte[] password) throws Exception {
-        // DES算法要求有一个可信任的随机数源
-//        SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
         SecureRandom random = new SecureRandom();
-        // 创建一个DESKeySpec对象
         DESKeySpec desKey = new DESKeySpec(password);
-        // 创建一个密匙工厂
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
-        // 将DESKeySpec对象转换成SecretKey对象
         SecretKey securekey = keyFactory.generateSecret(desKey);
-        // Cipher对象实际完成解密操作
         Cipher cipher = Cipher.getInstance(C_DES);
-//        Cipher cipher = Cipher.getInstance(DES);
-        // 用密匙初始化Cipher对象
         cipher.init(Cipher.DECRYPT_MODE, securekey, random);
-        // 真正开始解密操作
         return cipher.doFinal(src);
     }
 }

@@ -10,6 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.util.StdDateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * TODO
  *
@@ -19,14 +26,19 @@ import java.util.Map;
  */
 public class JacksonUtil {
     public static ObjectMapper mapper = new ObjectMapper();
+    private static final Logger log = LoggerFactory.getLogger(JacksonUtil.class);
 
     static {
         // 转换为格式化的json
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         // 如果json中有新增的字段并且是实体类类中不存在的，不报错
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        //修改日期格式
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+        //修改日期格式 - use thread-safe StdDateFormat
+        StdDateFormat dateFormat = new StdDateFormat();
+        dateFormat.withTimeZone(TimeZone.getDefault());
+        dateFormat.withLocale(Locale.getDefault());
+        dateFormat.withColonInTimeZone(true);
+        mapper.setDateFormat(dateFormat);
     }
 
     /**
@@ -40,7 +52,7 @@ public class JacksonUtil {
         try {
             jsonStr = mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e1) {
-            e1.printStackTrace();
+            log.error("Failed to convert object to JSON", e1);
         }
         return jsonStr;
     }
@@ -56,7 +68,7 @@ public class JacksonUtil {
         try {
             byteArr = mapper.writeValueAsBytes(obj);
         } catch (JsonProcessingException e1) {
-            e1.printStackTrace();
+            log.error("Failed to convert object to byte array", e1);
         }
         return byteArr;
     }
@@ -74,7 +86,7 @@ public class JacksonUtil {
         try {
             t = mapper.readValue(jsonStr, beanType);
         } catch (IOException e1) {
-            e1.printStackTrace();
+            log.error("Failed to convert JSON to object", e1);
         }
         return t;
     }
@@ -92,7 +104,7 @@ public class JacksonUtil {
         try {
             t = mapper.readValue(byteArr, beanType);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Failed to convert byte array to object", e);
         }
         return t;
     }
@@ -108,7 +120,7 @@ public class JacksonUtil {
         try {
             jsonStr = mapper.writeValueAsString(list);
         } catch (JsonProcessingException e1) {
-            e1.printStackTrace();
+            log.error("Failed to convert list to JSON string", e1);
         }
         return jsonStr;
     }
@@ -124,7 +136,7 @@ public class JacksonUtil {
         try {
             list = mapper.readValue(jsonStr, List.class);
         } catch (IOException e1) {
-            e1.printStackTrace();
+            log.error("Failed to convert JSON to list", e1);
         }
         return list;
     }
@@ -140,7 +152,7 @@ public class JacksonUtil {
         try {
             jsonStr = mapper.writeValueAsString(map);
         } catch (JsonProcessingException e1) {
-            e1.printStackTrace();
+            log.error("Failed to convert map to JSON string", e1);
         }
         return jsonStr;
     }
@@ -156,7 +168,7 @@ public class JacksonUtil {
         try {
             map = mapper.readValue(jsonStr, Map.class);
         } catch (IOException e1) {
-            e1.printStackTrace();
+            log.error("Failed to convert JSON to map", e1);
         }
         return map;
     }

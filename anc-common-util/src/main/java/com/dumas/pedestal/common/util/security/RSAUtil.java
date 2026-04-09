@@ -10,12 +10,14 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.crypto.Cipher;
 
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 非对称加密 RSA
@@ -29,9 +31,13 @@ import org.apache.commons.codec.binary.Base64;
  * @since 2020-02-28 15:06
  */
 public class RSAUtil {
+    private static final Logger logger = LoggerFactory.getLogger(RSAUtil.class);
     private static final String RSA = "RSA";
-    private static Map<Integer, String> keyMap = new HashMap<Integer, String>();  //用于封装随机产生的公钥与私钥
+    private static final String RSA_TRANSFORMATION = "RSA/ECB/OAEPWithSHA-256AndMGF1Padding";
+    private static final int KEY_SIZE = 2048;
+    private static Map<Integer, String> keyMap = new ConcurrentHashMap<Integer, String>();  //用于封装随机产生的公钥与私钥
 
+    @Deprecated
     public static void main(String[] args) throws Exception {
         //生成公钥和私钥
         genKeyPair();
@@ -52,8 +58,8 @@ public class RSAUtil {
     public static void genKeyPair() throws NoSuchAlgorithmException {
         // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(RSA);
-        // 初始化密钥对生成器，密钥大小为96-1024位
-        keyPairGen.initialize(1024,new SecureRandom());
+        // 初始化密钥对生成器，密钥大小为2048位 (minimum recommended for security)
+        keyPairGen.initialize(KEY_SIZE, new SecureRandom());
         // 生成一个密钥对，保存在keyPair中
         KeyPair keyPair = keyPairGen.generateKeyPair();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();   // 得到私钥
@@ -80,8 +86,8 @@ public class RSAUtil {
         //base64编码的公钥
         byte[] decoded = Base64.decodeBase64(publicKey);
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance(RSA).generatePublic(new X509EncodedKeySpec(decoded));
-        //RSA加密
-        Cipher cipher = Cipher.getInstance(RSA);
+        //RSA加密 with OAEP padding (secure against chosen-ciphertext attacks)
+        Cipher cipher = Cipher.getInstance(RSA_TRANSFORMATION);
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
         String outStr = Base64.encodeBase64String(cipher.doFinal(str.getBytes(StandardCharsets.UTF_8)));
         return outStr;
@@ -102,8 +108,8 @@ public class RSAUtil {
         //base64编码的私钥
         byte[] decoded = Base64.decodeBase64(privateKey);
         RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance(RSA).generatePrivate(new PKCS8EncodedKeySpec(decoded));
-        //RSA解密
-        Cipher cipher = Cipher.getInstance(RSA);
+        //RSA解密 with OAEP padding (secure against chosen-ciphertext attacks)
+        Cipher cipher = Cipher.getInstance(RSA_TRANSFORMATION);
         cipher.init(Cipher.DECRYPT_MODE, priKey);
         String outStr = new String(cipher.doFinal(inputByte));
         return outStr;
