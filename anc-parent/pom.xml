@@ -44,7 +44,7 @@
         <!-- messagePack -->
         <msgpack.version>0.6.12</msgpack.version>
         <!--工具-->
-        <jackson-databind.version>2.18.3</jackson-databind.version>
+        <jackson-databind.version>2.18.12</jackson-databind.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
         <commons-pool2.version>2.6.2</commons-pool2.version>
         <commons-collections4.version>4.4</commons-collections4.version>
