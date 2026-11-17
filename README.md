@@ -26,8 +26,8 @@ AppNuclearCenter 是一套企业级 Java 基础框架模板，提供微服务架
 | 消息队列 | RocketMQ | 5.3.3 |
 | 对象存储 | 阿里云 OSS | 3.18.3 |
 | API 文档 | Swagger (Springfox) | 2.10.0 |
-| 序列化 | Jackson / Protobuf | 2.18.3 / 4.32.0 |
-| 工具库 | Hutool / Guava / Apache Commons | 5.8.34 / 33.1.0 / 多版本 |
+| 序列化 | Jackson / Protobuf | 2.18.12 / 4.32.0 |
+| 工具库 | Hutool / Guava / Apache Commons | 5.8.34 / 33.8.0 / 多版本 |
 | JDK | Java 17 | - |
 
 ## 模块架构
